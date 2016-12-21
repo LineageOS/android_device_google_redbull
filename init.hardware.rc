@@ -808,7 +808,6 @@ service bugreport /system/bin/dumpstate -d -p -z
     class main
     disabled
     oneshot
-    keycodes 114 115 116
 
 # DSDS feature
 # Set to Dual-sim mode based on CDT setting
