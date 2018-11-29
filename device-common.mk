@@ -124,7 +124,7 @@ PRODUCT_COPY_FILES += \
 MSM_VIDC_TARGET_LIST := lito # Get the color format from kernel headers
 MASTER_SIDE_CP_TARGET_LIST := lito # ION specific settings
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.mpssrfs.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_PLATFORM).mpssrfs.rc
   PRODUCT_COPY_FILES += \
@@ -196,7 +196,7 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub-service.generic
 
 # CHRE tools
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     chre_power_test_client \
     chre_test_client
@@ -293,7 +293,7 @@ PRODUCT_PACKAGES += \
     sound_trigger.primary.lito
 
 # Add Oslo test for debug rom
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tunneling_hal_test \
     sensor_param_test \
@@ -511,9 +511,11 @@ PRODUCT_PACKAGES += \
     libcameradepthcalibrator
 
 # Google Camera HAL test libraries in debug builds
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += \
     libgoogle_camera_hal_proprietary_tests \
     libgoogle_camera_hal_tests
+endif
 
 PRODUCT_PACKAGES += \
     fs_config_dirs \
@@ -541,7 +543,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 USE_QCRIL_OEMHOOK := true
 
 HOSTAPD := hostapd
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 HOSTAPD += hostapd_cli
 endif
 PRODUCT_PACKAGES += $(HOSTAPD)
@@ -551,7 +553,7 @@ WPA += wpa_supplicant_wcn.conf
 WPA += wpa_supplicant
 PRODUCT_PACKAGES += $(WPA)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += wpa_cli
 endif
 
@@ -608,7 +610,7 @@ PRODUCT_PACKAGES += \
     libaudiozoom \
     libdevicestatelistener
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
@@ -670,7 +672,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.snd_card.open.retries=50
 
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 # Subsystem ramdump
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.ssr.enable_ramdumps=1
@@ -680,7 +682,7 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.ssr.restart_level=modem,adsp
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 # Sensor debug flag
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.debug.ash.logger=0 \
@@ -694,7 +696,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 PRODUCT_PACKAGES += \
     charger_res_images
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 # b/36703476: Set default log size to 1M
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.logd.size=1M
@@ -747,7 +749,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.radio.log_prefix="modem_log_"
 
 # Enable modem logging for debug
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.modem.diag.mdlog=true
 else
@@ -757,8 +759,8 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.sys.modem.diag.mdlog_br_num=5
 
-# Enable tcpdump_logger on userdebug and eng
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Enable tcpdump_logger on eng
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_PROPERTY_OVERRIDES += \
         persist.vendor.tcpdump.log.alwayson=false \
         persist.vendor.tcpdump.log.br_num=5
@@ -779,7 +781,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.gadgethal.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.gadgethal.sh
 
 # default usb oem functions
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_PROPERTY_OVERRIDES += \
       persist.vendor.usb.usbradio.config=diag
 endif
@@ -848,7 +850,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 # Enable iwlan service logging for debug
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_PROPERTY_OVERRIDES += persist.vendor.iwlan.logging.logcat=true
 endif
 
@@ -946,7 +948,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.thermal_warmreset = true \
 
 # Vendor verbose logging default property
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.verbose_logging_enabled=true
 else
@@ -954,8 +956,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.verbose_logging_enabled=false
 endif
 
-# Disable Rescue Party on userdebug & eng build
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Disable Rescue Party on eng build
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.disable_rescue=true
 endif
