@@ -41,6 +41,9 @@ KERNEL_MODULES_LOAD := $(foreach m,$(KERNEL_MODULES_LOAD_RAW),$(notdir $(m)))
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(filter $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
 
+# Manifests
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/redbull/lineage_compatibility_matrix.xml
+
 # Partitions
 AB_OTA_PARTITIONS += \
     vendor
