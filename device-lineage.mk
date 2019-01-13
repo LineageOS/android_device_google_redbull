@@ -116,3 +116,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/commonsys-intf/display \
     vendor/qcom/opensource/data-ipa-cfg-mgr \
     vendor/qcom/opensource/dataservices \
+
+# Trust HAL
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
