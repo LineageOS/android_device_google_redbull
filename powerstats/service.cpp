@@ -16,7 +16,6 @@
 
 #define LOG_TAG "android.hardware.power.stats@1.0-service.pixel"
 
-#include <android-base/properties.h>
 #include <android/log.h>
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
@@ -58,7 +57,6 @@ using android::hardware::google::pixel::powerstats::DisplayStateResidencyDataPro
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
 
-    bool isDebuggable = android::base::GetBoolProperty("ro.debuggable", false);
 
     PowerStats *service = new PowerStats();
 
@@ -122,13 +120,10 @@ int main(int /* argc */, char ** /* argv */) {
 
     service->addStateResidencyDataProvider(socSdp);
 
-    if (isDebuggable) {
-        // Add WLAN power entity
-        uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
-        auto wlanSdp = sp<WlanStateResidencyDataProvider>::make(wlanId,
-            "/sys/kernel/wifi/power_stats");
-        service->addStateResidencyDataProvider(wlanSdp);
-    }
+    // Add WLAN power entity
+    uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
+    auto wlanSdp = sp<WlanStateResidencyDataProvider>::make(wlanId, "/sys/kernel/wifi/power_stats");
+    service->addStateResidencyDataProvider(wlanSdp);
 
     uint32_t displayId = service->addPowerEntity("Display", PowerEntityType::SUBSYSTEM);
     auto displaySdp =
