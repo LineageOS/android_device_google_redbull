@@ -42,6 +42,7 @@ BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNE
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(filter $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
 
 # Manifests
+DEVICE_MANIFEST_FILE += device/google/redbull/lineage_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/redbull/lineage_compatibility_matrix.xml
 
 # Partitions
@@ -59,6 +60,10 @@ BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 1803550720
 endif
 BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 30720000
 BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 30720000
+
+# SELinux
+BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy-lineage/dynamic
+BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy-lineage/vendor
 
 # Verified Boot
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
