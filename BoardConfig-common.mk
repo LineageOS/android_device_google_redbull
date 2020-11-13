@@ -380,7 +380,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 
-include device/google/redbull-sepolicy/redbull-sepolicy.mk
+include device/google/redbull/sepolicy/redbull-sepolicy.mk
 
 QCOM_BOARD_PLATFORMS += lito
 QC_PROP_ROOT := vendor/qcom/sm7250/proprietary
@@ -518,7 +518,7 @@ PRODUCT_COPY_FILES += \
 # We can't use a variable as the prefix to an include statement
 # because it makes it too difficult to convert to starlark
 TARGET_BOARD_NAME_DIR := device/google/$(TARGET_BOOTLOADER_BOARD_NAME)
--include device/google/$(TARGET_BOOTLOADER_BOARD_NAME)-sepolicy/$(TARGET_BOOTLOADER_BOARD_NAME)-sepolicy.mk
+-include device/google/$(TARGET_BOOTLOADER_BOARD_NAME)/sepolicy/$(TARGET_BOOTLOADER_BOARD_NAME)-sepolicy.mk
 
 TARGET_BOARD_INFO_FILE := $(TARGET_BOARD_NAME_DIR)/board-info.txt
 TARGET_BOARD_COMMON_PATH := $(TARGET_BOARD_NAME_DIR)/sm7250
