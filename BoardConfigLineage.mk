@@ -14,6 +14,23 @@
 # limitations under the License.
 #
 
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+KERNEL_LD := LD=ld.lld
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_CONFIG := redbull_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/redbull
+TARGET_NEEDS_DTBOIMAGE := true
+
+# Kernel modules
+KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat device/google/redbull/modules.load))
+KERNEL_MODULES_LOAD := $(foreach m,$(KERNEL_MODULES_LOAD_RAW),$(notdir $(m)))
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(filter $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
+
 # Verified Boot
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
