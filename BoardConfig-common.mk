@@ -181,7 +181,6 @@ BOOT_KERNEL_MODULES := \
 	subsystem_notif.ko \
 	ramdump.ko \
 	msm_memshare.ko \
-	msm_bus_dbg_rpmh.ko \
 	msm_bus_rpmh.ko \
 	rpmh-regulator.ko \
 	qcom-geni-se.ko \
@@ -196,7 +195,6 @@ BOOT_KERNEL_MODULES := \
 	spi-geni-qcom.ko \
 	i2c-qcom-geni.ko \
 	ion-alloc.ko \
-	msm_rtb.ko \
 	pinctrl-spmi-gpio.ko \
 	pinctrl-spmi-mpp.ko \
 	pwm-qti-lpg.ko \
@@ -344,7 +342,6 @@ BOOT_KERNEL_MODULES := \
 	leds-qpnp-flash-common.ko \
 	leds-qpnp-flash-v2.ko \
 	of_slimbus.ko \
-	tz_log.ko \
 	google_wlan_mac.ko \
 	msm_ext_display.ko \
 	msm_qmp.ko \
