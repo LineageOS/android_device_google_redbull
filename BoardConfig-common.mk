@@ -165,7 +165,6 @@ BOOT_KERNEL_MODULES := \
 	spi-geni-qcom.ko \
 	i2c-qcom-geni.ko \
 	ion-alloc.ko \
-	msm_rtb.ko \
 	pinctrl-spmi-gpio.ko \
 	pinctrl-spmi-mpp.ko \
 	pwm-qti-lpg.ko \
