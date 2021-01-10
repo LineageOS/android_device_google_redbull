@@ -13,6 +13,10 @@ TARGET_NEEDS_DTBOIMAGE := true
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
 
 # Kernel modules
+BOOT_KERNEL_MODULES += \
+    heatmap.ko \
+    touch_offload.ko
+
 KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat device/google/redbull/modules.load))
 KERNEL_MODULES_LOAD := $(foreach m,$(KERNEL_MODULES_LOAD_RAW),$(notdir $(m)))
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
