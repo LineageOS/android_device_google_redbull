@@ -17,6 +17,10 @@ TARGET_KERNEL_SOURCE := kernel/google/redbull
 TARGET_NEEDS_DTBOIMAGE := true
 
 # Kernel modules
+BOOT_KERNEL_MODULES += \
+    heatmap.ko \
+    touch_offload.ko
+
 KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat device/google/redbull/modules.load))
 KERNEL_MODULES_LOAD := $(foreach m,$(KERNEL_MODULES_LOAD_RAW),$(notdir $(m)))
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
