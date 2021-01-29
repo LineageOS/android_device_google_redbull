@@ -8,6 +8,7 @@ BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/qcom/sm7250
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/tracking_denials
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/st
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/verizon
+BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/lineage
 
 # Pixel-wide sepolicy
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_sniffer
