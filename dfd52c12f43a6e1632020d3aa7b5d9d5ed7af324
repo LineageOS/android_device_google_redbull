@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1d166b9_106adba6",
+        "filename": "Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 23886
+      },
+      "writtenOn": "2021-01-31T23:11:22Z",
+      "side": 1,
+      "message": "this needs to be symlinked to system_ext now instead of product. Thanks for commenting on this change and making me recognize my previous bringup derps lol",
+      "revId": "dfd52c12f43a6e1632020d3aa7b5d9d5ed7af324",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
