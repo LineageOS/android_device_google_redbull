@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dedf8d7_cad9cd3c",
+        "filename": "sepolicy-lineage/dynamic/hal_lineage_livedisplay_qti.te",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 23886
+      },
+      "writtenOn": "2021-02-18T00:35:01Z",
+      "side": 1,
+      "message": "Not needed unless using Adaptive Backlight.",
+      "revId": "71fcd47da1cd5b8a5a81a84c3f4ac6f8446e2f16",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
