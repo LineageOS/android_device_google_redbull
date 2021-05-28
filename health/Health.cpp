@@ -63,7 +63,7 @@ constexpr char kVoltageAvg[] {FG_DIR "/battery/voltage_now"};
 
 static BatteryDefender battDefender(WLC_DIR "/present");
 static BatteryThermalControl battThermalControl(
-    "sys/devices/virtual/thermal/tz-by-name/soc/mode");
+    "/sys/devices/virtual/thermal/tz-by-name/soc/mode");
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
 static LowBatteryShutdownMetrics shutdownMetrics(kVoltageAvg);
 static DeviceHealth deviceHealth;
