@@ -19,11 +19,15 @@ BOARD_KERNEL_IMAGE_NAME := Image.lz4
 KERNEL_LD := LD=ld.lld
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
+TARGET_KERNEL_ADDITIONAL_FLAGS += LLVM=1
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := redbull_defconfig
 TARGET_KERNEL_SOURCE := kernel/google/redbull
 TARGET_NEEDS_DTBOIMAGE := true
+# Use Gnu AS until we can switch to LLVM_IAS=1
+KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/gas/$(HOST_PREBUILT_TAG)
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
 
 # Kernel modules
 BOOT_KERNEL_MODULES += \
