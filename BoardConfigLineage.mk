@@ -34,12 +34,6 @@ BOOT_KERNEL_MODULES += \
     heatmap.ko \
     touch_offload.ko \
 
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),redfin)
-    BOOT_KERNEL_MODULES += sec_touch.ko
-else ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),bramble)
-    BOOT_KERNEL_MODULES += ftm5.ko
-endif
-
 KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat device/google/redbull/modules.load))
 KERNEL_MODULES_LOAD := $(foreach m,$(KERNEL_MODULES_LOAD_RAW),$(notdir $(m)))
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(filter-out $(BOOT_KERNEL_MODULES), $(KERNEL_MODULES_LOAD))
