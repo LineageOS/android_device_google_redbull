@@ -82,6 +82,7 @@
 /(vendor|system/vendor)/bin/adpl                u:object_r:adpl_exec:s0
 /(vendor|system/vendor)/bin/ssgtzd              u:object_r:ssgtzd_exec:s0
 /(vendor|system/vendor)/bin/feature_enabler_client              u:object_r:feature_enabler_client_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.qti.hardware\.memtrack-service   u:object_r:hal_memtrack_default_exec:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
