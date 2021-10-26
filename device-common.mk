@@ -343,8 +343,8 @@ PRODUCT_COPY_FILES += \
     device/google/redbull/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl-redbull \
-    android.hardware.health@2.1-service
+    android.hardware.health-service.redbull \
+    android.hardware.health-service.redbull_recovery
 
 # Storage health HAL
 PRODUCT_PACKAGES += \
