@@ -502,8 +502,6 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 5364514816
 # Set error limit to BOARD_SUPER_PARTITON_SIZE - 500MB
 BOARD_SUPER_PARTITION_ERROR_LIMIT := 9231663104
 
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
-
 -include device/google/redbull/soong/pixel_soong_config.mk
 
 # List of modules that should not load automatically
