@@ -16,8 +16,6 @@ TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := redbull_defconfig
 TARGET_KERNEL_SOURCE := kernel/google/redbull
 TARGET_NEEDS_DTBOIMAGE := true
-# Use a gcc toolchain that offers the aarch64-linux-gnu- prefix
-KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/gas/$(HOST_PREBUILT_TAG)
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
 
 # Kernel modules
