@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb5dc7c8_0e199965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14838
+      },
+      "writtenOn": "2023-01-01T12:12:45Z",
+      "side": 1,
+      "message": "microg people should rather use the opensource https://gitea.angry.im/PeterCxy/OpenEUICC",
+      "revId": "a23291442e040bd82e6bb25843d6030b80e4cf02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
