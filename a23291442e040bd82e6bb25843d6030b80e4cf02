@@ -16,6 +16,24 @@
       "message": "microg people should rather use the opensource https://gitea.angry.im/PeterCxy/OpenEUICC",
       "revId": "a23291442e040bd82e6bb25843d6030b80e4cf02",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612f2f7a_63389c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-01-01T12:27:18Z",
+      "side": 1,
+      "message": "Is that fully working now conpared to EuiccGoogle?",
+      "parentUuid": "eb5dc7c8_0e199965",
+      "revId": "a23291442e040bd82e6bb25843d6030b80e4cf02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
