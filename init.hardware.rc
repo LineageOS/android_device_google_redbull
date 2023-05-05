@@ -751,6 +751,9 @@ service loc_launcher /vendor/bin/loc_launcher
     user gps
     group gps
 
+on property:persist.sys.xtra-daemon.enabled=*
+    restart loc_launcher
+
 # Allow access to touch
 on property:vendor.all.modules.ready=1
     chown system input /dev/touch_offload
