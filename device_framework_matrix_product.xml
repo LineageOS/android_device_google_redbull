@@ -1,4 +1,4 @@
-<compatibility-matrix version="1.0" type="framework" level="5">
+<compatibility-matrix version="1.0" type="framework">
    <hal format="hidl" optional="false">
        <name>com.qualcomm.qti.imscmservice</name>
        <version>2.2</version>
