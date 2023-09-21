@@ -859,9 +859,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
-# Set Vendor SPL to match platform
-VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
-
 PRODUCT_PROPERTY_OVERRIDES += vendor.audio.adm.buffering.ms=2
 PRODUCT_PROPERTY_OVERRIDES += vendor.audio_hal.period_multiplier=2
 PRODUCT_PROPERTY_OVERRIDES += af.fast_track_multiplier=1
