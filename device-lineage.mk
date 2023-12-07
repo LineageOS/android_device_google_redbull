@@ -141,10 +141,6 @@ PRODUCT_PACKAGES += \
     nos_app_keymaster:64 \
     nos_app_weaver:64
 
-# Protobuf
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full-vendorcompat
-
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-ScopedWakelock.vendor:32 \
@@ -227,8 +223,8 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.2.vendor:64 \
     android.hardware.security.keymint-V3-ndk.vendor:64 \
     android.hardware.security.rkp-V3-ndk.vendor:64 \
-    android.hardware.thermal@1.0.vendor:32 \
-    android.hardware.thermal@2.0.vendor:32 \
+    android.hardware.thermal@1.0.vendor \
+    android.hardware.thermal@2.0.vendor \
     android.hardware.weaver-V2-ndk.vendor:64 \
     android.hardware.weaver@1.0.vendor:64 \
     android.hardware.wifi-V1-ndk.vendor:64 \
