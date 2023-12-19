@@ -17,20 +17,62 @@
 <resources>
     <string-array name="configs_device">
         <!-- Live Captions (Pixel 2017 + OEM) -->
+        <item>device_personalization_services/Captions__allow_box_x_axis_movement=true</item>
+        <item>device_personalization_services/Captions__available_for_download=en-US;fr-FR;fr-BE;fr-CH;it-IT;it-CH;de-DE;de-AT;de-BE;de-CH;es-US</item>
+        <item>device_personalization_services/Captions__disable_prod=false</item>
+        <!-- <item>device_personalization_services/Captions__enable=false</item> -->
+        <item>device_personalization_services/Captions__enable_adaptive_box_width=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality_input=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality_language_detection=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_music=true</item>
+        <!-- <item>device_personalization_services/Captions__enable_clearcut_logging=true</item> -->
+        <item>device_personalization_services/Captions__enable_language_detection=true</item>
+        <item>device_personalization_services/Captions__enable_multilang=true</item>
+        <item>device_personalization_services/Captions__enable_punctuations=true</item>
+        <item>device_personalization_services/Captions__enable_setting_page=false</item>
+        <item>device_personalization_services/Captions__enable_text_transform=false</item>
+        <item>device_personalization_services/Captions__enable_westworld_logging=false</item>
+        <item>device_personalization_services/Captions__enable_zero_day=false</item>
         <item>device_personalization_services/Captions__manifest_url_template=https://storage.googleapis.com/captions/%{NAMESPACE}_%{VERSION}_manifest.json</item>
         <item>device_personalization_services/Captions__model_version_v1=20190613</item>
         <item>device_personalization_services/Captions__model_version_v1_2=20200112</item>
+        <item>device_personalization_services/Captions__new_model_version=20230731</item>
         <item>device_personalization_services/Captions__speech_threshold=0.2</item>
+        <item>device_personalization_services/Captions__supported_languages=en-US;fr-FR;it-IT;de-DE</item>
+        <item>device_personalization_services/Captions__supported_languages_beta_quality=fr-FR;it-IT;de-DE</item>
         <item>device_personalization_services/Captions__surface_sound_events=true</item>
+        <item>device_personalization_services/Captions__text_transform_augmented_input=true</item>
         <item>device_personalization_services/Captions__visibility_playing_duration_millis=5000</item>
         <item>device_personalization_services/Captions__visibility_stopped_duration_millis=1500</item>
 
         <!-- Now Playing (Pixel 2017) -->
-        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=194:https://storage.googleapis.com/music-iq-db/updatable_ytm_db/20211212-030112/manifest.json</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_apk_music_detector_min_score=0.45</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_get_model_state_cooldown_seconds_cloud_search=9</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=3071:https://storage.googleapis.com/music-iq-db/updatable_db_v3/20231217-030102/manifest.json</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_matcher_match_threshold_17_09_02=1.0E-6</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_on_demand_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_on_demand_music_confidence=0.48</item>
+        <item>device_personalization_services/NowPlaying__cloud_api_allowed=true</item>
+        <item>device_personalization_services/NowPlaying__dsp_model_checksum_enabled=false</item>
+        <!-- <item>device_personalization_services/NowPlaying__enable_usage_fa=true</item> -->
+        <item>device_personalization_services/NowPlaying__favorites_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__feature_users_count_enabled=true</item>
+        <!-- <item>device_personalization_services/NowPlaying__federated_analytics_allowed=true</item> -->
+        <item>device_personalization_services/NowPlaying__handle_ambient_music_results_with_history=true</item>
+        <item>device_personalization_services/NowPlaying__min_training_interval_millis=86400000</item>
+        <item>device_personalization_services/NowPlaying__nnfp_v3_model_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_enable_eager_prompt=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_fingerprinter_being_setup_warning=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_hide_if_fingerprinter_install_not_confirmed=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_min_supported_aga_version=12.35.17</item>
+        <item>device_personalization_services/NowPlaying__on_demand_retry_fingerprinter_install=true</item>
+        <item>device_personalization_services/NowPlaying__youtube_export_enabled=true</item>
 
         <!-- Adaptive Sound (Pixel 2020) -->
         <item>device_personalization_services/AdaptiveAudio__enable_adaptive_audio=true</item>
-        <item>device_personalization_services/AdaptiveAudio__show_promo_notification=true</item>
+        <item>device_personalization_services/AdaptiveAudio__show_promo_notification=false</item>
+        <item>device_personalization_services/AdaptiveAudio__use_silence_detector_state_bug_fix=true</item>
 
         <!-- Screen attention (Pixel 2019) -->
         <item>device_personalization_services/Attention__accel_sensor_enabled=false</item>
@@ -41,6 +83,8 @@
         <item>device_personalization_services/Attention__proximity_sensor_enabled=false</item>
 
         <!-- Recents text selection (for Pixel Launcher users) -->
+        <item>device_personalization_services/Overview__enable_barcode_detection=false</item>
+        <item>device_personalization_services/Overview__enable_image_search=false</item>
         <item>device_personalization_services/Overview__enable_image_selection=true</item>
         <item>device_personalization_services/Overview__enable_japanese_ocr=true</item>
         <item>device_personalization_services/Overview__enable_lens_r_overview_long_press=true</item>
