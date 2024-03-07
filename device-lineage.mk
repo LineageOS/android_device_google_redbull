@@ -93,7 +93,7 @@ PRODUCT_PACKAGES += \
     com.google.hardware.pixel.display-V1-ndk.vendor:64 \
     libdisplayconfig.qti \
     libqdutils:32 \
-    libqservice:32 \ \
+    libqservice:32 \
     vendor.display.config@1.0.vendor \
     vendor.display.config@1.1.vendor:64 \
     vendor.display.config@1.2.vendor:64 \
