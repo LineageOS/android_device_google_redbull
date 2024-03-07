@@ -127,20 +127,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libjson
 
-# Nos
-PRODUCT_PACKAGES += \
-    libnos:64 \
-    libnosprotos:64 \
-    libnos_client_citadel:64 \
-    libnos_datagram:64 \
-    libnos_datagram_citadel:64 \
-    libnos_feature:64 \
-    libnos_transport:64 \
-    nos_app_avb:64 \
-    nos_app_identity:64 \
-    nos_app_keymaster:64 \
-    nos_app_weaver:64
-
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-ScopedWakelock.vendor:32 \
@@ -182,6 +168,7 @@ PRODUCT_PACKAGES += \
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwifi-hal:64 \
+    libwifi-hal-ctrl:64 \
     libwifi-hal-qcom
 
 # Misc interfaces
@@ -227,7 +214,6 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0.vendor \
     android.hardware.weaver-V2-ndk.vendor:64 \
     android.hardware.weaver@1.0.vendor:64 \
-    android.hardware.wifi-V1-ndk.vendor:64 \
     android.hardware.wifi@1.0.vendor:64 \
     android.hidl.memory.block@1.0.vendor \
     android.system.net.netd@1.1.vendor:64 \
