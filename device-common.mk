@@ -30,9 +30,6 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/redbull \
     hardware/qcom/sm7250 \
     system/chre/host/hal_generic \
-    vendor/google/airbrush/floral \
-    vendor/google/biometrics/face/florence \
-    vendor/google/darwinn \
     hardware/qcom/sm7250/display \
     vendor/google/camera \
     vendor/qcom/sm7250 \
@@ -434,7 +431,7 @@ PRODUCT_PACKAGES += \
 
 # NFC and Secure Element packages
 PRODUCT_PACKAGES += \
-    NfcNci \
+    $(RELEASE_PACKAGE_NFC_STACK) \
     Tag \
     SecureElement \
     android.hardware.nfc-service.st \
@@ -1031,7 +1028,7 @@ include hardware/google/pixel/citadel/citadel.mk
 -include hardware/google/pixel/pixelstats/device.mk
 
 # thermal
--include hardware/google/pixel/thermal/device.mk
+include device/google/gs-common/thermal/thermal_hal/device.mk
 
 # power HAL
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
