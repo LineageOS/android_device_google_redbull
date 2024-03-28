@@ -36,14 +36,6 @@ ifeq ($(USES_DEVICE_GOOGLE_REDBULL),true)
   subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
   $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
 
-CNE_LIBS := libvndfwk_detect_jni.qti.so
-CNE_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/app/CneApp/lib/arm64/,$(notdir $(CNE_LIBS)))
-$(CNE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "CneApp lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /vendor/lib64/$(notdir $@) $@
-
 DM_LIBS := libdmengine.so libdmjavaplugin.so
 DM_SYMLINKS := $(addprefix $(TARGET_OUT_PRODUCT)/priv-app/DMService/lib/arm/,$(notdir $(DM_LIBS)))
 $(DM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -52,5 +44,5 @@ $(DM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@rm -rf $@
 	$(hide) ln -sf /product/lib/$(notdir $@) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(CNE_SYMLINKS) $(DM_SYMLINKS)
+ALL_DEFAULT_INSTALLED_MODULES += $(DM_SYMLINKS)
 endif
