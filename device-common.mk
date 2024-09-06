@@ -34,6 +34,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/google/camera \
     vendor/qcom/sm7250 \
     vendor/google/interfaces \
+    vendor/google/tools/power-anomaly-qcril \
     vendor/google_devices/common/proprietary/confirmatioui_hal \
     vendor/google_nos/host/android \
     vendor/google_nos/test/system-test-harness
@@ -89,6 +90,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     messaging \
+
+# ramdump_app
+PRODUCT_PACKAGES_DEBUG += RamdumpUploader
+
+# ssr_detector_app
+PRODUCT_PACKAGES += SSRestartDetector
 
 TARGET_PRODUCT_PROP := $(LOCAL_PATH)/product.prop
 
@@ -1043,4 +1050,10 @@ include device/google/gs-common/thermal/thermal_hal/device.mk
 
 # Pixel Logger
 include hardware/google/pixel/PixelLogger/PixelLogger.mk
+
+# Touch service
+include device/google/gs-common/touch/twoshay/twoshay.mk
 #################################################################################
+
+# Update soong config namespace
+-include vendor/google/build/soong/soong_config_namespace/qcril_oemhook.mk
