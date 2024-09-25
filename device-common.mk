@@ -946,9 +946,6 @@ include device/google/gs-common/thermal/thermal_hal/device.mk
 # mm_event
 -include hardware/google/pixel/mm/device.mk
 
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
-
 # Touch service
 include device/google/gs-common/touch/twoshay/twoshay.mk
 #################################################################################
