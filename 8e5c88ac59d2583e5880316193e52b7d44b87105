@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4928309c_8ecc6006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14962
+      },
+      "writtenOn": "2024-12-26T14:42:56Z",
+      "side": 1,
+      "message": "Tested on linage-22.1 redfin with wired and wireless charging",
+      "revId": "8e5c88ac59d2583e5880316193e52b7d44b87105",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
