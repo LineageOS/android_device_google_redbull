@@ -56,6 +56,9 @@ PRODUCT_PACKAGES += \
     chre_daemon_msm
 
 # Display
+$(call soong_config_set,qtidisplay,default,true)
+$(call soong_config_set,qtidisplay,drmpp,true)
+$(call soong_config_set,qtidisplay,gralloc4,true)
 $(call soong_config_set,qtidisplay,gralloc_handle_has_reserved_size,true)
 
 # GNSS
