@@ -328,10 +328,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
 
-# Light HAL
-PRODUCT_PACKAGES += \
-    lights.lito
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.memtrack-service
