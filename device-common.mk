@@ -260,6 +260,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.qdcm.mode_combine=1 \
     vendor.display.lbe.supported=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=qcom
+
 # vndservicemanager has been removed from API30 devices (aosp/1235751)
 # but we still need it for display services.
 PRODUCT_PACKAGES += \
@@ -325,10 +328,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
-
-# Light HAL
-PRODUCT_PACKAGES += \
-    lights.lito
 
 # Memtrack HAL
 PRODUCT_PACKAGES += \
