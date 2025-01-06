@@ -23,42 +23,12 @@ PRODUCT_VENDOR_MOVE_ENABLED := true
 TARGET_BOARD_PLATFORM := lito
 
 PRODUCT_SOONG_NAMESPACES += \
+    device/google/redbull \
     hardware/google/interfaces \
     hardware/google/pixel \
-    device/google/redbull \
-    hardware/qcom/sm7250 \
-    system/chre/host/hal_generic \
     hardware/qcom/sm7250/display \
-    vendor/google/camera \
-    vendor/qcom/sm7250 \
-    vendor/google/interfaces \
-    vendor/google/tools/power-anomaly-qcril \
-    vendor/google_devices/common/proprietary/confirmatioui_hal \
-    vendor/google_nos/host/android \
-    vendor/google_nos/test/system-test-harness
-
-# Include GPS soong namespace
-PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/sm7250/gps \
-    vendor/qcom/sm7250/proprietary/gps \
-    vendor/qcom/sm7250/codeaurora/location
-
-# Include sensors soong namespace
-PRODUCT_SOONG_NAMESPACES += \
-    vendor/qcom/sensors \
-    vendor/google/tools/sensors
-
-# Single vendor RIL/Telephony/data with SM7250
-  PRODUCT_SOONG_NAMESPACES += \
-      vendor/qcom/sm7250/codeaurora/commonsys/telephony/ims/ims-ext-common \
-      vendor/qcom/sm7250/codeaurora/dataservices/rmnetctl \
-      vendor/qcom/sm7250/proprietary/commonsys/qcrilOemHook \
-      vendor/qcom/sm7250/proprietary/commonsys/telephony-apps/ims \
-      vendor/qcom/sm7250/proprietary/commonsys/telephony-apps/QtiTelephonyService \
-      vendor/qcom/sm7250/proprietary/commonsys/telephony-apps/xdivert \
-      vendor/qcom/sm7250/proprietary/qcril-data-hal \
-      vendor/qcom/sm7250/proprietary/qcril-hal \
-      vendor/qcom/sm7250/proprietary/data
+    system/chre/host/hal_generic
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
@@ -382,9 +352,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.bluetooth.emb_wp_mode=false \
     ro.vendor.bluetooth.wipower=false
-
-# Bluetooth ftmdaemon needs libbt-hidlclient.so
-PRODUCT_SOONG_NAMESPACES += vendor/qcom/proprietary/bluetooth/hidl_client
 
 # DRM HAL
 PRODUCT_PACKAGES += \
