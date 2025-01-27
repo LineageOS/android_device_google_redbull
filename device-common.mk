@@ -677,6 +677,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
 
+# Partitions
+PRODUCT_PACKAGES += \
+    vendor_firmware_mnt_mountpoint
+
 # powerstats HAL
 PRODUCT_PACKAGES += \
     android.hardware.power.stats@1.0-service.pixel
