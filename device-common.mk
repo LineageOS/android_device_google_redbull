@@ -28,6 +28,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel \
     hardware/qcom/sm7250/display \
     hardware/qcom/sm7250/gps \
+    hardware/qcom-caf/bootctrl \
     system/chre/host/hal_generic \
     vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um
 
@@ -124,10 +125,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Use FUSE passthrough
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.fuse.passthrough.enable=true
-
-PRODUCT_PACKAGES += \
-    bootctrl.lito \
-    bootctrl.lito.recovery
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cp_system_other_odex=1
@@ -410,9 +407,8 @@ PRODUCT_PACKAGES += \
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl-pixel-legacy \
-    android.hardware.boot@1.2-impl-pixel-legacy.recovery \
-    android.hardware.boot@1.2-service \
+    android.hardware.boot-service.qti \
+    android.hardware.boot-service.qti.recovery
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
