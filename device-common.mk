@@ -328,6 +328,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.snapshot_enabled=0 \
     persist.vendor.radio.snapshot_timer=0
 
+# Kernel
+PRODUCT_ENABLE_UFFD_GC := true
+
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.lito
