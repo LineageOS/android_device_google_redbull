@@ -102,7 +102,7 @@ TARGET_RECOVERY_WIPE := device/google/redbull/recovery.wipe
 TARGET_RECOVERY_FSTAB := device/google/redbull/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := \
-    //hardware/google/pixel/recovery:librecovery_ui_pixel
+    //hardware/google/pixel/recovery:librecovery_ui_pixel \
     libfstab
 
 # Enable chain partition for system.
