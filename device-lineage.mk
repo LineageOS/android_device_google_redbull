@@ -53,6 +53,9 @@ include hardware/google/pixel/touch/device.mk
 PRODUCT_PACKAGES += \
     chre_daemon_msm
 
+# Display
+$(call soong_config_set,qtidisplay,gralloc_handle_has_reserved_size,true)
+
 # GNSS
 PRODUCT_PACKAGES += \
     flp.conf
