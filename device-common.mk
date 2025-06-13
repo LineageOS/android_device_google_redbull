@@ -877,9 +877,6 @@ include hardware/google/pixel/citadel/citadel.mk
 # Factory OTA
 -include vendor/google/factoryota/client/factoryota.mk
 
-# storage
--include hardware/google/pixel/pixelstats/device.mk
-
 # thermal
 include device/google/gs-common/thermal/thermal_hal/device.mk
 
