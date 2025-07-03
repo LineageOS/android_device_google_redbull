@@ -678,10 +678,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
 
-# powerstats HAL
-PRODUCT_PACKAGES += \
-    android.hardware.power.stats@1.0-service.pixel
-
 QTI_TELEPHONY_UTILS := qti-telephony-utils
 QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
 PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
