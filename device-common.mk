@@ -592,7 +592,7 @@ PRODUCT_PACKAGES += \
 
 # powerstats HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power.stats@1.0-service.pixel
+    android.hardware.power.stats-service.pixel
 
 QTI_TELEPHONY_UTILS := qti-telephony-utils
 QTI_TELEPHONY_UTILS += qti_telephony_utils.xml

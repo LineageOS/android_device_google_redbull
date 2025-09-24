@@ -14,60 +14,41 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power.stats@1.0-service.pixel"
+#define LOG_TAG "android.hardware.power.stats-service.pixel"
 
+#include <PowerStatsAidl.h>
+#include <android-base/logging.h>
 #include <android-base/properties.h>
-#include <android/log.h>
-#include <binder/IPCThreadState.h>
-#include <binder/IServiceManager.h>
-#include <binder/ProcessState.h>
-#include <hidl/HidlTransportSupport.h>
-#include <pixelpowerstats/AidlStateResidencyDataProvider.h>
-#include <pixelpowerstats/DisplayStateResidencyDataProvider.h>
-#include <pixelpowerstats/GenericStateResidencyDataProvider.h>
-#include <pixelpowerstats/PowerStats.h>
-#include <pixelpowerstats/WlanStateResidencyDataProvider.h>
+#include <android/binder_manager.h>
+#include <android/binder_process.h>
+#include <dataproviders/DisplayStateResidencyDataProvider.h>
+#include <dataproviders/GenericStateResidencyDataProvider.h>
+#include <dataproviders/PixelStateResidencyDataProvider.h>
+#include <dataproviders/WlanStateResidencyDataProvider.h>
+#include <log/log.h>
 
-#include "RailDataProvider.h"
+using aidl::android::hardware::power::stats::PowerStats;
+using aidl::android::hardware::power::stats::DisplayStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::GenericStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::PixelStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::WlanStateResidencyDataProvider;
 
-using android::OK;
-using android::sp;
-using android::status_t;
+using StateResidencyConfig = GenericStateResidencyDataProvider::StateResidencyConfig;
+using PowerEntityConfig = GenericStateResidencyDataProvider::PowerEntityConfig;
 
-// libhwbinder:
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
-
-// Generated HIDL files
-using android::hardware::power::stats::V1_0::IPowerStats;
-using android::hardware::power::stats::V1_0::PowerEntityInfo;
-using android::hardware::power::stats::V1_0::PowerEntityStateSpace;
-using android::hardware::power::stats::V1_0::PowerEntityType;
-using android::hardware::power::stats::V1_0::implementation::PowerStats;
-
-// Pixel specific
-using android::hardware::google::pixel::powerstats::AidlStateResidencyDataProvider;
-using android::hardware::google::pixel::powerstats::DisplayStateResidencyDataProvider;
-using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
-using android::hardware::google::pixel::powerstats::PowerEntityConfig;
-using android::hardware::google::pixel::powerstats::RailDataProvider;
-using android::hardware::google::pixel::powerstats::StateResidencyConfig;
-using android::hardware::google::pixel::powerstats::WlanStateResidencyDataProvider;
-
-int main(int /* argc */, char ** /* argv */) {
-    ALOGI("power.stats service 1.0 is starting.");
+int main() {
+    LOG(INFO) << "Pixel PowerStats HAL AIDL Service is starting.";
 
     bool isDebuggable = android::base::GetBoolProperty("ro.debuggable", false);
 
-    PowerStats *service = new PowerStats();
+    ABinderProcess_setThreadPoolMaxThreadCount(0);
 
-    // Add rail data provider
-    service->setRailDataProvider(std::make_unique<RailDataProvider>());
+    std::shared_ptr<PowerStats> service = ndk::SharedRefBase::make<PowerStats>();
 
     // Add power entities related to rpmh
     const uint64_t RPM_CLK = 19200;  // RPM runs at 19.2Mhz. Divide by 19200 for msec
     std::function<uint64_t(uint64_t)> rpmConvertToMs = [](uint64_t a) { return a / RPM_CLK; };
-    std::vector<StateResidencyConfig> rpmStateResidencyConfigs = {
+    const std::vector<StateResidencyConfig> rpmStateResidencyConfigs = {
             {.name = "Sleep",
              .entryCountSupported = true,
              .entryCountPrefix = "Sleep Count:",
@@ -77,25 +58,16 @@ int main(int /* argc */, char ** /* argv */) {
              .lastEntrySupported = true,
              .lastEntryPrefix = "Sleep Last Entered At:",
              .lastEntryTransform = rpmConvertToMs}};
+    std::vector<PowerEntityConfig> rpmCfgs = {
+            {rpmStateResidencyConfigs, "APSS", "APSS"},
+            {rpmStateResidencyConfigs, "MPSS", "MPSS"},
+            {rpmStateResidencyConfigs, "ADSP", "ADSP"},
+            {rpmStateResidencyConfigs, "ADSP_ISLAND", "ADSP_ISLAND"},
+            {rpmStateResidencyConfigs, "CDSP", "CDSP"},
+    };
 
-    auto rpmSdp = sp<GenericStateResidencyDataProvider>::make("/sys/power/rpmh_stats/master_stats");
-
-    uint32_t apssId = service->addPowerEntity("APSS", PowerEntityType::SUBSYSTEM);
-    rpmSdp->addEntity(apssId, PowerEntityConfig("APSS", rpmStateResidencyConfigs));
-
-    uint32_t mpssId = service->addPowerEntity("MPSS", PowerEntityType::SUBSYSTEM);
-    rpmSdp->addEntity(mpssId, PowerEntityConfig("MPSS", rpmStateResidencyConfigs));
-
-    uint32_t adspId = service->addPowerEntity("ADSP", PowerEntityType::SUBSYSTEM);
-    rpmSdp->addEntity(adspId, PowerEntityConfig("ADSP", rpmStateResidencyConfigs));
-
-    uint32_t adspIslandId = service->addPowerEntity("ADSP_ISLAND", PowerEntityType::SUBSYSTEM);
-    rpmSdp->addEntity(adspIslandId, PowerEntityConfig("ADSP_ISLAND", rpmStateResidencyConfigs));
-
-    uint32_t cdspId = service->addPowerEntity("CDSP", PowerEntityType::SUBSYSTEM);
-    rpmSdp->addEntity(cdspId, PowerEntityConfig("CDSP", rpmStateResidencyConfigs));
-
-    service->addStateResidencyDataProvider(std::move(rpmSdp));
+    service->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/power/rpmh_stats/master_stats", rpmCfgs));
 
     // Add SoC power entity
     std::vector<StateResidencyConfig> socStateResidencyConfigs = {
@@ -114,26 +86,28 @@ int main(int /* argc */, char ** /* argv */) {
              .totalTimePrefix = "actual last sleep(msec):",
              .lastEntrySupported = false}};
 
-    auto socSdp = sp<GenericStateResidencyDataProvider>::make("/sys/power/system_sleep/stats");
+    std::vector<PowerEntityConfig> socCfgs = {
+            {socStateResidencyConfigs, "SoC"},
+    };
 
-    uint32_t socId = service->addPowerEntity("SoC", PowerEntityType::POWER_DOMAIN);
-    socSdp->addEntity(socId, PowerEntityConfig(socStateResidencyConfigs));
-
-    service->addStateResidencyDataProvider(socSdp);
+    service->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/power/system_sleep/stats", socCfgs));
 
     if (isDebuggable) {
         // Add WLAN power entity
-        uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
-        auto wlanSdp =
-                sp<WlanStateResidencyDataProvider>::make(wlanId, "/sys/kernel/wifi/power_stats");
-        service->addStateResidencyDataProvider(wlanSdp);
+        service->addStateResidencyDataProvider(std::make_unique<WlanStateResidencyDataProvider>(
+                "WLAN", "/sys/kernel/wifi/power_stats"));
     }
 
-    uint32_t displayId = service->addPowerEntity("Display", PowerEntityType::SUBSYSTEM);
-    auto displaySdp = sp<DisplayStateResidencyDataProvider>::make(
-            displayId, "/sys/class/backlight/panel0-backlight/state",
-            std::vector<std::string>{"Off", "LP", "1080x2340@60", "1080x2340@90"});
-    service->addStateResidencyDataProvider(displaySdp);
+    std::vector<std::string> states = {
+            "Off",
+            "LP",
+            "On: 1080x2340@60",
+            "On: 1080x2340@90",
+    };
+
+    service->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
+            "Display", "/sys/class/backlight/panel0-backlight/state", states));
 
     // Add NFC power entity
     StateResidencyConfig nfcStateConfig = {.entryCountSupported = true,
@@ -148,44 +122,29 @@ int main(int /* argc */, char ** /* argv */) {
             std::make_pair("Active-RW", "Active Reader/Writer mode:"),
     };
 
-    sp<GenericStateResidencyDataProvider> nfcSdp =
-            new GenericStateResidencyDataProvider("/sys/class/misc/st21nfc/device/power_stats");
+    std::vector<PowerEntityConfig> nfcCfgs = {
+            {generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders), "NFC",
+             "NFC subsystem"},
+    };
 
-    uint32_t nfcId = service->addPowerEntity("NFC", PowerEntityType::SUBSYSTEM);
-    nfcSdp->addEntity(nfcId, PowerEntityConfig(generateGenericStateResidencyConfigs(
-                                     nfcStateConfig, nfcStateHeaders)));
-
-    service->addStateResidencyDataProvider(nfcSdp);
+    service->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/class/misc/st21nfc/device/power_stats", nfcCfgs));
 
     // Add Power Entities that require the Aidl data provider
-    auto aidlSdp = sp<AidlStateResidencyDataProvider>::make();
-    uint32_t citadelId = service->addPowerEntity("Citadel", PowerEntityType::SUBSYSTEM);
-    aidlSdp->addEntity(citadelId, "Citadel", {"Last-Reset", "Active", "Deep-Sleep"});
+    auto pixelSdp = std::make_unique<PixelStateResidencyDataProvider>();
 
-    auto serviceStatus = android::defaultServiceManager()->addService(
-            android::String16("power.stats-vendor"), aidlSdp);
-    if (serviceStatus != android::OK) {
-        ALOGE("Unable to register power.stats-vendor service %d", serviceStatus);
-        return 1;
-    }
-    sp<android::ProcessState> ps{android::ProcessState::self()};  // Create non-HW binder threadpool
-    ps->startThreadPool();
+    pixelSdp->addEntity("Citadel", {{0, "Last-Reset"}, {1, "Active"}, {2, "Deep-Sleep"}});
 
-    service->addStateResidencyDataProvider(aidlSdp);
+    pixelSdp->start();
 
-    // Configure the threadpool
-    configureRpcThreadpool(1, true /*callerWillJoin*/);
+    service->addStateResidencyDataProvider(std::move(pixelSdp));
 
-    status_t status = service->registerAsService();
-    if (status != OK) {
-        ALOGE("Could not register service for power.stats HAL Iface (%d), exiting.", status);
-        return 1;
-    }
+    const std::string instance = std::string() + PowerStats::descriptor + "/default";
+    binder_status_t status =
+            AServiceManager_addService(service->asBinder().get(), instance.c_str());
+    LOG_ALWAYS_FATAL_IF(status != STATUS_OK);
 
-    ALOGI("power.stats service is ready");
-    joinRpcThreadpool();
+    ABinderProcess_joinThreadPool();
 
-    // In normal operation, we don't expect the thread pool to exit
-    ALOGE("power.stats service is shutting down");
-    return 1;
+    return EXIT_FAILURE;  // should not reach
 }
