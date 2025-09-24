@@ -17,27 +17,10 @@ package {
 }
 
 cc_binary {
-    name: "android.hardware.power.stats@1.0-service.pixel",
-    relative_install_path: "hw",
-    init_rc: ["android.hardware.power.stats@1.0-service.pixel.rc"],
+    name: "android.hardware.power.stats-service.pixel",
+    defaults: ["powerstats_pixel_binary_defaults"],
     srcs: ["service.cpp"],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    static_libs: [
-        "libpixelpowerstats",
-    ],
     shared_libs: [
-        "libbase",
-        "libcutils",
-        "libhidlbase",
-        "libfmq",
-        "liblog",
-        "libutils",
-        "android.hardware.power.stats@1.0",
-        "pixelpowerstats_provider_aidl_interface-cpp",
-        "libbinder",
+        "android.hardware.power.stats-impl.pixel",
     ],
-    vendor: true,
 }
