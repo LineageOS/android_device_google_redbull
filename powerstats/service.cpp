@@ -22,12 +22,11 @@
 #include <binder/IServiceManager.h>
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
-
 #include <pixelpowerstats/AidlStateResidencyDataProvider.h>
+#include <pixelpowerstats/DisplayStateResidencyDataProvider.h>
 #include <pixelpowerstats/GenericStateResidencyDataProvider.h>
 #include <pixelpowerstats/PowerStats.h>
 #include <pixelpowerstats/WlanStateResidencyDataProvider.h>
-#include <pixelpowerstats/DisplayStateResidencyDataProvider.h>
 
 #include "RailDataProvider.h"
 
@@ -48,12 +47,12 @@ using android::hardware::power::stats::V1_0::implementation::PowerStats;
 
 // Pixel specific
 using android::hardware::google::pixel::powerstats::AidlStateResidencyDataProvider;
+using android::hardware::google::pixel::powerstats::DisplayStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::PowerEntityConfig;
-using android::hardware::google::pixel::powerstats::StateResidencyConfig;
 using android::hardware::google::pixel::powerstats::RailDataProvider;
+using android::hardware::google::pixel::powerstats::StateResidencyConfig;
 using android::hardware::google::pixel::powerstats::WlanStateResidencyDataProvider;
-using android::hardware::google::pixel::powerstats::DisplayStateResidencyDataProvider;
 
 int main(int /* argc */, char ** /* argv */) {
     ALOGI("power.stats service 1.0 is starting.");
@@ -69,15 +68,15 @@ int main(int /* argc */, char ** /* argv */) {
     const uint64_t RPM_CLK = 19200;  // RPM runs at 19.2Mhz. Divide by 19200 for msec
     std::function<uint64_t(uint64_t)> rpmConvertToMs = [](uint64_t a) { return a / RPM_CLK; };
     std::vector<StateResidencyConfig> rpmStateResidencyConfigs = {
-        {.name = "Sleep",
-         .entryCountSupported = true,
-         .entryCountPrefix = "Sleep Count:",
-         .totalTimeSupported = true,
-         .totalTimePrefix = "Sleep Accumulated Duration:",
-         .totalTimeTransform = rpmConvertToMs,
-         .lastEntrySupported = true,
-         .lastEntryPrefix = "Sleep Last Entered At:",
-         .lastEntryTransform = rpmConvertToMs}};
+            {.name = "Sleep",
+             .entryCountSupported = true,
+             .entryCountPrefix = "Sleep Count:",
+             .totalTimeSupported = true,
+             .totalTimePrefix = "Sleep Accumulated Duration:",
+             .totalTimeTransform = rpmConvertToMs,
+             .lastEntrySupported = true,
+             .lastEntryPrefix = "Sleep Last Entered At:",
+             .lastEntryTransform = rpmConvertToMs}};
 
     auto rpmSdp = sp<GenericStateResidencyDataProvider>::make("/sys/power/rpmh_stats/master_stats");
 
@@ -100,20 +99,20 @@ int main(int /* argc */, char ** /* argv */) {
 
     // Add SoC power entity
     std::vector<StateResidencyConfig> socStateResidencyConfigs = {
-        {.name = "AOSD",
-         .header = "RPM Mode:aosd",
-         .entryCountSupported = true,
-         .entryCountPrefix = "count:",
-         .totalTimeSupported = true,
-         .totalTimePrefix = "actual last sleep(msec):",
-         .lastEntrySupported = false},
-        {.name = "CXSD",
-         .header = "RPM Mode:cxsd",
-         .entryCountSupported = true,
-         .entryCountPrefix = "count:",
-         .totalTimeSupported = true,
-         .totalTimePrefix = "actual last sleep(msec):",
-         .lastEntrySupported = false}};
+            {.name = "AOSD",
+             .header = "RPM Mode:aosd",
+             .entryCountSupported = true,
+             .entryCountPrefix = "count:",
+             .totalTimeSupported = true,
+             .totalTimePrefix = "actual last sleep(msec):",
+             .lastEntrySupported = false},
+            {.name = "CXSD",
+             .header = "RPM Mode:cxsd",
+             .entryCountSupported = true,
+             .entryCountPrefix = "count:",
+             .totalTimeSupported = true,
+             .totalTimePrefix = "actual last sleep(msec):",
+             .lastEntrySupported = false}};
 
     auto socSdp = sp<GenericStateResidencyDataProvider>::make("/sys/power/system_sleep/stats");
 
@@ -125,39 +124,36 @@ int main(int /* argc */, char ** /* argv */) {
     if (isDebuggable) {
         // Add WLAN power entity
         uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
-        auto wlanSdp = sp<WlanStateResidencyDataProvider>::make(wlanId,
-            "/sys/kernel/wifi/power_stats");
+        auto wlanSdp =
+                sp<WlanStateResidencyDataProvider>::make(wlanId, "/sys/kernel/wifi/power_stats");
         service->addStateResidencyDataProvider(wlanSdp);
     }
 
     uint32_t displayId = service->addPowerEntity("Display", PowerEntityType::SUBSYSTEM);
-    auto displaySdp =
-        sp<DisplayStateResidencyDataProvider>::make(displayId,
-        "/sys/class/backlight/panel0-backlight/state",
-        std::vector<std::string>{"Off", "LP", "1080x2340@60", "1080x2340@90"});
+    auto displaySdp = sp<DisplayStateResidencyDataProvider>::make(
+            displayId, "/sys/class/backlight/panel0-backlight/state",
+            std::vector<std::string>{"Off", "LP", "1080x2340@60", "1080x2340@90"});
     service->addStateResidencyDataProvider(displaySdp);
 
     // Add NFC power entity
-    StateResidencyConfig nfcStateConfig = {
-        .entryCountSupported = true,
-        .entryCountPrefix = "Cumulative count:",
-        .totalTimeSupported = true,
-        .totalTimePrefix = "Cumulative duration msec:",
-        .lastEntrySupported = true,
-        .lastEntryPrefix = "Last entry timestamp msec:"
-    };
+    StateResidencyConfig nfcStateConfig = {.entryCountSupported = true,
+                                           .entryCountPrefix = "Cumulative count:",
+                                           .totalTimeSupported = true,
+                                           .totalTimePrefix = "Cumulative duration msec:",
+                                           .lastEntrySupported = true,
+                                           .lastEntryPrefix = "Last entry timestamp msec:"};
     std::vector<std::pair<std::string, std::string>> nfcStateHeaders = {
-        std::make_pair("Idle", "Idle mode:"),
-        std::make_pair("Active", "Active mode:"),
-        std::make_pair("Active-RW", "Active Reader/Writer mode:"),
+            std::make_pair("Idle", "Idle mode:"),
+            std::make_pair("Active", "Active mode:"),
+            std::make_pair("Active-RW", "Active Reader/Writer mode:"),
     };
 
     sp<GenericStateResidencyDataProvider> nfcSdp =
             new GenericStateResidencyDataProvider("/sys/class/misc/st21nfc/device/power_stats");
 
     uint32_t nfcId = service->addPowerEntity("NFC", PowerEntityType::SUBSYSTEM);
-    nfcSdp->addEntity(nfcId,
-        PowerEntityConfig(generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders)));
+    nfcSdp->addEntity(nfcId, PowerEntityConfig(generateGenericStateResidencyConfigs(
+                                     nfcStateConfig, nfcStateHeaders)));
 
     service->addStateResidencyDataProvider(nfcSdp);
 
@@ -167,7 +163,7 @@ int main(int /* argc */, char ** /* argv */) {
     aidlSdp->addEntity(citadelId, "Citadel", {"Last-Reset", "Active", "Deep-Sleep"});
 
     auto serviceStatus = android::defaultServiceManager()->addService(
-        android::String16("power.stats-vendor"), aidlSdp);
+            android::String16("power.stats-vendor"), aidlSdp);
     if (serviceStatus != android::OK) {
         ALOGE("Unable to register power.stats-vendor service %d", serviceStatus);
         return 1;

@@ -24,20 +24,21 @@ struct OnDeviceMmt {
     std::unique_ptr<MessageQueueSync> fmqSynchronized;
 };
 class RailDataProvider : public IRailDataProvider {
-public:
+  public:
     RailDataProvider();
     // Methods from ::android::hardware::power::stats::V1_0::IPowerStats follow.
     Return<void> getRailInfo(IPowerStats::getRailInfo_cb _hidl_cb) override;
-    Return<void> getEnergyData(const hidl_vec<uint32_t>& railIndices,
-                        IPowerStats::getEnergyData_cb _hidl_cb) override;
+    Return<void> getEnergyData(const hidl_vec<uint32_t> &railIndices,
+                               IPowerStats::getEnergyData_cb _hidl_cb) override;
     Return<void> streamEnergyData(uint32_t timeMs, uint32_t samplingRate,
-                        IPowerStats::streamEnergyData_cb _hidl_cb) override;
- private:
-     OnDeviceMmt mOdpm;
-     void findIioPowerMonitorNodes();
-     size_t parsePowerRails();
-     int parseIioEnergyNode(std::string devName);
-     Status parseIioEnergyNodes();
+                                  IPowerStats::streamEnergyData_cb _hidl_cb) override;
+
+  private:
+    OnDeviceMmt mOdpm;
+    void findIioPowerMonitorNodes();
+    size_t parsePowerRails();
+    int parseIioEnergyNode(std::string devName);
+    Status parseIioEnergyNodes();
 };
 }  // namespace powerstats
 }  // namespace pixel
