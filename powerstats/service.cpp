@@ -87,7 +87,7 @@ int main() {
              .lastEntrySupported = false}};
 
     std::vector<PowerEntityConfig> socCfgs = {
-            {socStateResidencyConfigs, "SoC"},
+            {socStateResidencyConfigs, "SoC", "SoC"},
     };
 
     service->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
