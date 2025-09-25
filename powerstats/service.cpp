@@ -23,14 +23,14 @@
 #include <android/binder_process.h>
 #include <dataproviders/DisplayStateResidencyDataProvider.h>
 #include <dataproviders/GenericStateResidencyDataProvider.h>
-#include <dataproviders/PixelStateResidencyDataProvider.h>
+#include <dataproviders/PixelPowerStatsDataProvider.h>
 #include <dataproviders/WlanStateResidencyDataProvider.h>
 #include <log/log.h>
 
 using aidl::android::hardware::power::stats::PowerStats;
 using aidl::android::hardware::power::stats::DisplayStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::GenericStateResidencyDataProvider;
-using aidl::android::hardware::power::stats::PixelStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::PixelPowerStatsDataProvider;
 using aidl::android::hardware::power::stats::WlanStateResidencyDataProvider;
 
 using StateResidencyConfig = GenericStateResidencyDataProvider::StateResidencyConfig;
@@ -133,7 +133,7 @@ int main() {
             "/sys/class/misc/st21nfc/device/power_stats", nfcCfgs));
 
     // Add Power Entities that require the Aidl data provider
-    auto pixelSdp = std::make_unique<PixelStateResidencyDataProvider>();
+    auto pixelSdp = std::make_unique<PixelPowerStatsDataProvider>();
 
     pixelSdp->addEntity("Citadel", {{0, "Last-Reset"}, {1, "Active"}, {2, "Deep-Sleep"}});
 
