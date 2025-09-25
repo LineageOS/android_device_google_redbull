@@ -29,8 +29,6 @@
 #include <pixelpowerstats/WlanStateResidencyDataProvider.h>
 #include <pixelpowerstats/DisplayStateResidencyDataProvider.h>
 
-#include "RailDataProvider.h"
-
 using android::OK;
 using android::sp;
 using android::status_t;
@@ -51,7 +49,6 @@ using android::hardware::google::pixel::powerstats::AidlStateResidencyDataProvid
 using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::PowerEntityConfig;
 using android::hardware::google::pixel::powerstats::StateResidencyConfig;
-using android::hardware::google::pixel::powerstats::RailDataProvider;
 using android::hardware::google::pixel::powerstats::WlanStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::DisplayStateResidencyDataProvider;
 
@@ -61,9 +58,6 @@ int main(int /* argc */, char ** /* argv */) {
     bool isDebuggable = android::base::GetBoolProperty("ro.debuggable", false);
 
     PowerStats *service = new PowerStats();
-
-    // Add rail data provider
-    service->setRailDataProvider(std::make_unique<RailDataProvider>());
 
     // Add power entities related to rpmh
     const uint64_t RPM_CLK = 19200;  // RPM runs at 19.2Mhz. Divide by 19200 for msec
