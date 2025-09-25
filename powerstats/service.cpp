@@ -100,10 +100,10 @@ int main() {
     }
 
     std::vector<std::string> states = {
-            "Off",
-            "LP",
-            "On: 1080x2340@60",
-            "On: 1080x2340@90",
+            "Off\n",
+            "LP\n",
+            "On: 1080x2340@60\n",
+            "On: 1080x2340@90\n",
     };
 
     service->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
