@@ -104,6 +104,8 @@ int main() {
             "LP\n",
             "On: 1080x2340@60\n",
             "On: 1080x2340@90\n",
+            "HBM: 1080x2340@60\n",
+            "HBM: 1080x2340@90\n",
     };
 
     service->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
