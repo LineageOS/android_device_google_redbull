@@ -35,7 +35,7 @@ PRODUCT_PRODUCT_PROPERTIES += ro.opa.eligible_device=true
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay-service.sdm
 
-$(call soong_config_set,livedisplay_sdm,enable_dm,false)
+$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 
 # Parts
 PRODUCT_PACKAGES += \
