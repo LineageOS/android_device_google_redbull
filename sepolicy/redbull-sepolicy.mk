@@ -21,6 +21,15 @@ BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/tracking_denials
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/st
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/verizon
 
+# misc_writer
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/google/misc_writer
+
+# thermal
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/google/thermal
+
+# twoshay
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/redbull/sepolicy/vendor/google/twoshay
+
 # Pixel-wide sepolicy
 BOARD_VENDOR_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 BOARD_VENDOR_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/ramdump/common
