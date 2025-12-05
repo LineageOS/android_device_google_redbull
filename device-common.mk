@@ -783,9 +783,6 @@ PRODUCT_PACKAGES += \
 
 # mm_event
 -include hardware/google/pixel/mm/device.mk
-
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
 #################################################################################
 
 # Update soong config namespace
