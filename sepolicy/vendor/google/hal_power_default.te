@@ -1,3 +1,5 @@
+hal_client_domain(hal_power_default, hal_thermal)
+
 allow hal_power_default hal_thermal_service:service_manager find;
 
 allow hal_power_default sysfs_msm_subsys:dir search;
