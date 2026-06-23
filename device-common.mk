@@ -26,6 +26,11 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/redbull \
     hardware/google/interfaces \
     hardware/google/pixel \
+    hardware/google/pixel/health \
+    hardware/google/pixel/pixelstats \
+    hardware/google/pixel/power-libperfmgr \
+    hardware/google/pixel/thermal \
+    hardware/google/pixel/usb \
     hardware/qcom/sm7250/display \
     hardware/qcom/sm7250/gps \
     hardware/qcom/wlan \
