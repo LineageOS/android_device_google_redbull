@@ -773,6 +773,8 @@ include hardware/google/pixel/common/pixel-common-device.mk
 PRODUCT_PACKAGES += \
     misc_writer
 
+$(call soong_config_set_bool,chre,chre_daemon_load_into_sensorspd,true)
+
 # Citadel
 include hardware/google/pixel/citadel/citadel.mk
 
