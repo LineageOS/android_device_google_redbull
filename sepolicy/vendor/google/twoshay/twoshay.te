@@ -17,10 +17,6 @@ binder_call(twoshay, platform_app)
 allow twoshay fwk_stats_service:service_manager find;
 binder_call(twoshay, stats_service_server)
 
-# Allow dumpsys output in bugreports.
-allow twoshay dumpstate:fd use;
-allow twoshay dumpstate:fifo_file write;
-
 # b/198755236
 dontaudit twoshay twoshay:capability dac_override;
 

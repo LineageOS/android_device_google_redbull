@@ -1,2 +1,0 @@
-# b/233569257
-dontaudit dumpstate app_zygote:process { signal };

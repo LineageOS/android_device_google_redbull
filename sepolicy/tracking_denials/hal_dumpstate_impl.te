@@ -1,2 +1,0 @@
-# b/193472671
-dontaudit hal_dumpstate_impl sysfs:file getattr;
