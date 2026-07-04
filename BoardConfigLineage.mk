@@ -32,6 +32,7 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 -include vendor/lineage/config/BoardConfigReservedSize.mk
 
 # SELinux
+include device/lineage/sepolicy/libion/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy-lineage/dynamic
 BOARD_SEPOLICY_DIRS += device/google/redbull/sepolicy-lineage/vendor
 
