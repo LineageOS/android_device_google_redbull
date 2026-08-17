@@ -18,3 +18,12 @@ user=_app isPrivApp=true seinfo=platform name=com.android.sdm.plugins.diagmon do
 
 # Domain for uscc omadm
 user=_app isPrivApp=true seinfo=platform name=com.android.sdm.plugins.usccdm domain=uscc_omadm type=app_data_file levelFrom=all
+
+# Hardware Info Collection
+user=_app isPrivApp=true name=com.google.android.hardwareinfo domain=hardware_info_app type=app_data_file levelFrom=user
+
+#Domain for omadm
+user=_app isPrivApp=true seinfo=platform name=com.android.omadm.service domain=omadm_app type=app_data_file levelFrom=all
+
+#Domain for secureui
+user=_app seinfo=platform name=com.qualcomm.qti.services.secureui* domain=secure_ui_service_app levelFrom=all

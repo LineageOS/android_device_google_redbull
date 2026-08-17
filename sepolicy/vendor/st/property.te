@@ -1,2 +1,2 @@
 vendor_internal_prop(vendor_nfc_prop)
-vendor_internal_prop(vendor_secure_element_prop)
+system_public_prop(vendor_secure_element_prop)
