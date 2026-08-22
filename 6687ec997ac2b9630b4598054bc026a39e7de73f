@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebee28d3_d8886355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-08-22T00:14:28Z",
+      "side": 1,
+      "message": "Kernel changes are https://github.com/elginsk8r/android_kernel_google_redbull/tree/lineage-23.2 for now",
+      "revId": "6687ec997ac2b9630b4598054bc026a39e7de73f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
