@@ -6,7 +6,6 @@
 
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
-TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_CONFIG := redbull_defconfig
 TARGET_KERNEL_SOURCE := kernel/google/redbull
 TARGET_NEEDS_DTBOIMAGE := true
