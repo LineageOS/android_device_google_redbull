@@ -43,10 +43,6 @@ PRODUCT_PACKAGES += \
 
 $(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 
-# Parts
-PRODUCT_PACKAGES += \
-    GoogleParts
-
 # RCS
 PRODUCT_PACKAGES += \
     PresencePolling \
