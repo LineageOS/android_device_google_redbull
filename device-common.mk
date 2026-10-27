@@ -780,6 +780,12 @@ PRODUCT_PACKAGES += \
 # power HAL
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
 
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb-service.redbull
+PRODUCT_PACKAGES += \
+    android.hardware.usb.gadget-service.redbull
+
 # mm_event
 -include hardware/google/pixel/mm/device.mk
 #################################################################################
